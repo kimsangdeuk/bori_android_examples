@@ -1,0 +1,45 @@
+1. View Variable --------------------------------------------
+SQLite db = Context.openDatabase();
+
+2. Home - onCreate ----------------------------------------
+setDatabase();
+setListView();
+
+3. setDatabase ----------------------------------------------
+int oldversion = db.getVersion();
+int newversion = 1;
+
+if (oldversion == 0)
+{
+	str sql = "CREATE TABLE IF NOT EXISTS memos
+	(id TEXT PRIMARY KEY, content TEXT)";
+	db.exec(sql);
+
+	// set new version
+	db.setVersion(newversion);
+}
+elif (oldversion < newversion)
+{
+	// change the structure of table(s)
+	
+	// set new version
+	db.setVersion(newversion);
+}
+
+4.setListView -----------------------------------------------
+listview1.clear();
+
+Rset rset = db.query("SELECT * FROM memos ORDER BY id DESC");
+for (int i = 1.. rset.rowCount())
+{
+	Control parent = listview1.addItem("Item");
+	str id = rset.getString(i, "id");
+	
+	TextView textTime = (TextView)parent.findChild("textTime");
+	textTime.setText(id);
+	
+	TextView textMemo = (TextView)parent.findChild("textMemo");
+	str text = rset.getString(i, "content");
+	textMemo.setText(text);
+}
+
