@@ -1,0 +1,24 @@
+1. View Variables ----------------------------------
+SQLite db = Context.openDatabase();
+str id;
+str content;
+
+2. onCreate ----------------------------------------
+if (! vars.contains("id"))
+{
+	textview1.setText("New");
+	return;	
+}
+
+id = vars.getString("id");
+textview1.setText(id);
+
+str sql = "SELECT * FROM memos WHERE id = `_id_`";
+sql.replace_("_id_", id);
+
+Rset rset = db.query(sql);
+if (rset.rowCount() < 1)
+	return;
+
+content = rset.getString(1, "content");
+edit1.setText(content);
