@@ -1,0 +1,30 @@
+1. Editor - imageviewCapture_onClick --------------------------------------------------
+Intent intent("android.media.action.IMAGE_CAPTURE");
+if(intent.resolveActivity())
+	View.startActivityForResult(intent, "onCaptureImage");
+
+2. onCaptureImage(int resultCode, Intent intent) ---------------------------------------
+if (resultCode == 0)
+	return;
+
+if (! intent.isNull())
+{
+	Bundle extras = intent.getExtras();
+	if (! extras.isNull())
+	{
+		Bitmap bmp = (Bitmap) extras.get("data");
+
+	}
+}
+
+3.
+		// show image
+		imageview1.setImageBitmap(bmp);
+		
+		// delete existing image file
+		
+		// save as file
+		Time t;
+		str fileName = t.toString("yyyy.MM.dd HH:mm:ss") + ".jpg";
+		FileInternal file(fileName);
+		file.writeBitmap(bmp, "jpeg", 100);
