@@ -1,0 +1,29 @@
+1. Home/onCreate -----------------------------------------
+	str sql = "CREATE TABLE memos
+	(id TEXT PRIMARY KEY, content TEXT, pic TEXT)";
+
+2. listview_onItemClick -------------------------------------
+if (nameClicked == "textDel")
+{
+	listview1.removeItem(index);
+	onDelete(id);
+	return;
+}
+
+3. onDelete (str id) -------------------------------------------
+// delete image file
+str sql = "SELECT pic FROM memos WHERE id = `_id_`";
+sql.replace_("_id_", id);
+Rset rset = db.query(sql);
+str pic = rset.getString(1, "pic");
+if (pic)
+{
+	FileInternal file(pic);
+	if (file.exists())
+		file.delete();
+}
+
+// delete from table
+sql = "DELETE FROM memos WHERE id = `_id_`";
+sql.replace_("_id_", id);
+db.exec(sql);
