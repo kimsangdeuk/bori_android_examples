@@ -1,0 +1,34 @@
+1. Editor/View Variables -----------------------------------------
+str picOld, pic;
+
+2. onCreate ------------------------------------------------------
+picOld = pic = rset.getString(1, "pic");
+if (pic)
+{
+	FileInternal file(pic);
+	if (file.exists())
+	{
+		Bitmap bmp = file.readBitmap(500,500);
+		imageview1.setImageBitmap(bmp);
+	}
+}
+
+3. onCaptureImage ---------------------------------------------
+		// delete existing image file
+		deleteImageFile();
+		
+
+4. onCaptureImage ---------------------------------------------
+fileName -> pic
+
+5. imageviewDelete_onclick --------------------------------------------------------
+deleteImageFile();
+pic = "";
+
+6. deleteImageFile --------------------------------------------
+if (pic)
+{
+	FileInternal file(pic);
+	if (file.exists())
+		file.delete();
+}
