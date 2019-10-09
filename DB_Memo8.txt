@@ -1,0 +1,60 @@
+1. onBackPressed ------------------------------------------
+save();
+View.finish();
+
+2. save() ----------------------------------------------------
+str text = edit1.getText();
+
+// new memo
+if (! id)
+{
+	if (! text && ! pic)
+		return;
+	// make new id
+	return;
+}
+
+// update memo
+if (text == content && pic == picOld)
+	return;
+if (! text && ! pic)
+{
+	// delete record
+}
+else
+{
+	// update record
+}
+
+// return result if saved
+View.setResult(1);
+
+3. make new id
+	Time t;
+	id = t.toString("yyyy.MM.dd HH:mm:ss");
+	// insert new record
+	str sql = "INSERT INTO memos VALUES (`_id_`, `_content_`, `_pic_`)";
+	sql.replace_("_id_", id);
+	sql.replace_("_content_", text);
+	sql.replace_("_pic_", pic);
+	db.exec(sql);
+	// return result if saved
+	View.setResult(1);
+
+4. delete record
+	str sql = "DELETE FROM memos WHERE id = `_id_`";
+	sql.replace_("_id_", id);
+	db.exec(sql);
+
+5. update record
+	str sql = "UPDATE memos SET content = `_content_`, pic = `_pic_`
+				WHERE id = `_id_`";
+	sql.replace_("_id_", id);
+	sql.replace_("_content_", text);
+	sql.replace_("_pic_", pic);
+	db.exec(sql);
+
+6. Home - onViewResult ------------------------------------------------------
+if (resultCode)
+	setListView();
+
